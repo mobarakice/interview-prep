@@ -15,14 +15,16 @@ flowchart TD
         A[Publisher] -->|Exchange| B(Routing/Queues)
         B -->|Pushes messages| C[Consumer A]
         B -->|Pushes messages| D[Consumer B]
-        Note over B: Message deleted after ack
+        B -.-> Note1[/"Message deleted after ack"\]
+        class Note1 noteStyle;
     end
     
     subgraph "Apache Kafka (Log-based Streaming)"
         E[Publisher] -->|Append Logs| F(Partition Log)
         F -->|Read at offset| G[Consumer Group - Node 1]
         F -->|Read at offset| H[Consumer Group - Node 2]
-        Note over F: Messages persist after read
+        F -.-> Note2[/"Messages persist after read"\]
+        class Note2 noteStyle;
     end
 ```
 

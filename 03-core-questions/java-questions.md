@@ -1,7 +1,7 @@
 # Java Architect-Level Interview Questions
 
 > 15 questions covering Java 21/25, JVM internals, concurrency, performance, collections, design patterns, and functional programming.
-> Cross-references: [Java Cheatsheet](../15-cheatsheets/java-cheatsheet.md) · [Spring Questions](./spring-questions.md)
+> Cross-references: [Java Cheatsheet](../15-cheatsheets/java-cheatsheet.md) · [Spring Questions](./spring-questions.md) · [Follow-up Answers](./java-followup-answers.md)
 
 ---
 
@@ -49,6 +49,9 @@ Virtual threads are mounted on carrier threads (platform threads in a ForkJoinPo
 - Assuming virtual threads replace thread pools entirely
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q1-virtual-threads-follow-up-answers).
+
 - "How does Spring Boot 3.2+ leverage virtual threads?"
 - "Compare virtual threads to the reactive model (WebFlux). When would you choose each?"
 - "What is structured concurrency and how does it relate to virtual threads?"
@@ -101,6 +104,9 @@ In practice, I use sealed interfaces for: command/event hierarchies in CQRS, res
 - Using sealed classes when a simple enum would suffice
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q2-sealed-classes--pattern-matching-follow-up-answers).
+
 - "How would you use sealed classes to model a state machine for loan processing?"
 - "What's the difference between sealed classes and the Visitor pattern?"
 - "How do guarded patterns (`when` clause) work?"
@@ -168,6 +174,9 @@ class Correct {
 - Confusing JMM guarantees with physical CPU cache coherence protocols
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q3-java-memory-model-jmm-follow-up-answers).
+
 - "Explain the difference between `volatile`, `Atomic*`, and `VarHandle` in terms of ordering guarantees."
 - "What is false sharing and how would you detect it in a high-throughput Java application?"
 - "How does the `final` field semantics interact with object publication?"
@@ -216,6 +225,9 @@ Practical knowledge of GC trade-offs, tuning experience, and the ability to sele
 - Not using `-XX:+UseContainerSupport` in Docker/K8s environments
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q4-gc-algorithms-follow-up-answers).
+
 - "How do you set JVM heap size in a Kubernetes pod? What's the relationship between `-Xmx` and the container memory limit?"
 - "Explain the GC's interaction with NUMA architectures."
 - "What are generational ZGC improvements in Java 21?"
@@ -265,6 +277,9 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 - Not creating custom `StructuredTaskScope` policies for complex orchestration
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q5-structured-concurrency-follow-up-answers).
+
 - "How would you implement a custom `StructuredTaskScope` that collects partial results?"
 - "Compare structured concurrency with reactive programming for service aggregation."
 - "How do scoped values (`ScopedValue`) complement structured concurrency?"
@@ -321,6 +336,9 @@ Deep understanding of lock striping, CAS operations, the evolution from Java 7 s
 - Confusing thread-safety of the map with thread-safety of the values stored in it
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q6-concurrenthashmap-follow-up-answers).
+
 - "How does `computeIfAbsent` prevent the thundering herd problem in cache loading?"
 - "What's the difference between `ConcurrentHashMap` and `ConcurrentSkipListMap`?"
 - "How would you implement a thread-safe LRU cache in Java?"
@@ -378,6 +396,9 @@ public record Money(BigDecimal amount, Currency currency) {
 - Not leveraging records with sealed interfaces for algebraic data types
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q7-records-follow-up-answers).
+
 - "Can records implement interfaces? How would you use this in a CQRS event hierarchy?"
 - "How do records interact with Jackson serialization/deserialization?"
 - "What are the implications of records for API backward compatibility?"
@@ -444,6 +465,9 @@ customPool.submit(() ->
 - Using parallel streams on small collections (overhead > benefit for < ~10K elements)
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q8-forkjoin--parallel-streams-follow-up-answers).
+
 - "How does the work-stealing algorithm work in detail?"
 - "What happens to the common ForkJoinPool when virtual threads are enabled?"
 - "How would you benchmark to decide between parallel streams and sequential processing?"
@@ -514,6 +538,9 @@ The API Gateway pattern IS the Facade pattern at system scale — providing a si
 - Treating patterns as rigid recipes rather than guidelines
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q9-design-patterns-follow-up-answers).
+
 - "How does the Repository pattern interact with CQRS at system scale?"
 - "What anti-patterns have you encountered in microservices, and how did you address them?"
 - "How do you decide when a pattern introduces more complexity than it solves?"
@@ -570,6 +597,9 @@ After:  P99 = 85ms, GC pauses = 2ms max (switched to ZGC)
 - Not accounting for container memory limits (JVM + native + off-heap ≤ container limit)
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q10-performance-tuning--profiling-follow-up-answers).
+
 - "How do you handle a production OutOfMemoryError? Walk me through your investigation process."
 - "What's the difference between heap and off-heap memory? When would you use off-heap?"
 - "How would you tune a Spring Boot application for sub-100ms P99 latency?"
@@ -622,6 +652,9 @@ value class Point {
 - Ignoring the performance cost of boxing in generic collections (`List<Integer>` vs `int[]`)
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q11-generics--project-valhalla-follow-up-answers).
+
 - "How does type erasure affect serialization frameworks like Jackson?"
 - "What are the implications of Valhalla for collections like `List<int>`?"
 - "Explain the difference between covariance, contravariance, and invariance with `? extends` and `? super`."
@@ -684,6 +717,9 @@ private final Cache<String, MyEvent> cache = Caffeine.newBuilder()
 - Fixing symptoms (increasing heap) instead of root cause (finding the leak)
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q12-memory-leak-detection-follow-up-answers).
+
 - "How would you detect a native memory leak vs. a heap memory leak?"
 - "What's the difference between a soft leak and a hard leak?"
 - "How does Caffeine cache differ from Guava cache, and why would you choose it?"
@@ -743,6 +779,9 @@ stream.gather(Gatherers.windowFixed(3))
 - Not planning for the removal of deprecated APIs (Security Manager removed)
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q13-java-25-features-follow-up-answers).
+
 - "What's your strategy for upgrading a large enterprise from Java 17 to Java 25?"
 - "How do you evaluate whether to adopt a preview feature?"
 - "What testing strategy ensures virtual threads work correctly with your existing codebase?"
@@ -828,6 +867,9 @@ class OrderServiceContractTest {
 - Writing tests after the architecture is set (testability should drive design)
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q14-testability-architecture-follow-up-answers).
+
 - "How do you test Saga patterns across microservices?"
 - "What's your approach to testing Kafka consumers and producers?"
 - "How do you handle test data management across microservices?"
@@ -912,6 +954,9 @@ Result<Order> result = validateCustomer(customerId)
 - Forcing FP style in inherently stateful code (database operations, I/O)
 
 ### Follow-up Questions
+
+> 💡 **Answers Available**: [View comprehensive answers to these follow-ups](./java-followup-answers.md#q15-functional-programming-follow-up-answers).
+
 - "How does functional error handling (Either/Result types) compare to exceptions in microservices?"
 - "How would you apply the monad pattern in a Spring Boot service?"
 - "What's the performance impact of heavy stream usage vs. imperative loops?"
